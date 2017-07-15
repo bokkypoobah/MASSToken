@@ -239,19 +239,91 @@ function printCrowdsaleContractDetails() {
   // console.log("RESULT: crowdsaleContractAbi=" + JSON.stringify(crowdsaleContractAbi));
   if (crowdsaleContractAddress != null && crowdsaleContractAbi != null) {
     var contract = eth.contract(crowdsaleContractAbi).at(crowdsaleContractAddress);
-    console.log("RESULT: crowdsale.controller=" + contract.controller());
-    console.log("RESULT: crowdsale.exchangeRate=" + contract.exchangeRate());
-    console.log("RESULT: crowdsale.investor_bonus=" + contract.investor_bonus());
-    console.log("RESULT: crowdsale.ait=" + contract.ait());
-    console.log("RESULT: crowdsale.totalSupplyCap=" + contract.totalSupplyCap().shift(-18));
-    console.log("RESULT: crowdsale.totalSold=" + contract.totalSold().shift(-18));
-    console.log("RESULT: crowdsale.minimum_investment=" + contract.minimum_investment().shift(-18));
-    console.log("RESULT: crowdsale.startBlock=" + contract.startBlock());
-    console.log("RESULT: crowdsale.endBlock=" + contract.endBlock());
-    console.log("RESULT: crowdsale.initializedBlock=" + contract.initializedBlock());
-    console.log("RESULT: crowdsale.finalizedBlock=" + contract.finalizedBlock());
-    console.log("RESULT: crowdsale.paused=" + contract.paused());
-    console.log("RESULT: crowdsale.transferable=" + contract.transferable());
+    var decimals = contract.decimals();
+    console.log("RESULT: crowdsale.name=" + contract.name());
+    console.log("RESULT: crowdsale.symbol=" + contract.symbol());
+    console.log("RESULT: crowdsale.decimals=" + decimals);
+    console.log("RESULT: crowdsale.version=" + contract.version());
+    console.log("RESULT: crowdsale.contractOwner=" + contract.contractOwner());
+    console.log("RESULT: crowdsale.ethFundDeposit=" + contract.ethFundDeposit());
+    console.log("RESULT: token.massFundDeposit=" + contract.massFundDeposit());
+    console.log("RESULT: crowdsale.ethFeeDeposit=" + contract.ethFeeDeposit());
+    console.log("RESULT: crowdsale.massPromisoryDeposit=" + contract.massPromisoryDeposit());
+    console.log("RESULT: crowdsale.ethPromisoryDeposit=" + contract.ethPromisoryDeposit());
+    console.log("RESULT: crowdsale.massBountyDeposit=" + contract.massBountyDeposit());
+    console.log("RESULT: crowdsale.ethBountyDeposit=" + contract.ethBountyDeposit());
+    console.log("RESULT: crowdsale.isFinalized=" + contract.isFinalized());
+    console.log("RESULT: crowdsale.fundingStartBlock=" + contract.fundingStartBlock());
+    console.log("RESULT: crowdsale.fundingEndBlock=" + contract.fundingEndBlock());
+    console.log("RESULT: crowdsale.tokenExchangeRate=" + contract.tokenExchangeRate());
+    console.log("RESULT: crowdsale.tokenCreationCap=" + contract.tokenCreationCap().shift(-decimals));
+    console.log("RESULT: crowdsale.totalPreSale=" + contract.totalPreSale().shift(-18));
+    console.log("RESULT: crowdsale.massFee=" + contract.massFee());
+    console.log("RESULT: crowdsale.promisoryFee=" + contract.promisoryFee());
+    console.log("RESULT: crowdsale.icoSaleBonus20=" + contract.icoSaleBonus20());
+    console.log("RESULT: crowdsale.icoSaleBonus20Cap=" + contract.icoSaleBonus20Cap().shift(-decimals));
+    console.log("RESULT: crowdsale.icoSaleBonus10=" + contract.icoSaleBonus10());
+    console.log("RESULT: crowdsale.icoSaleBonus10Cap=" + contract.icoSaleBonus10Cap().shift(-decimals));
+
+    console.log("RESULT: token._totalSupply=" + contract._totalSupply().shift(-decimals));
+    console.log("RESULT: token.releaseFunds=" + contract.releaseFunds());
+    console.log("RESULT: token.totalEthereum=" + contract.totalEthereum().shift(-18));
+    console.log("RESULT: token.allowTransfers=" + contract.allowTransfers());
+    var saleStart = contract.saleStart();
+    console.log("RESULT: token.saleStart=" + saleStart + " " + new Date(saleStart * 1000).toUTCString());
+
+    var latestBlock = eth.blockNumber;
+    var i;
+
+    var approvalEvents = contract.Approval({}, { fromBlock: crowdsaleFromBlock, toBlock: latestBlock });
+    i = 0;
+    approvalEvents.watch(function (error, result) {
+      console.log("RESULT: Approval " + i++ + " #" + result.blockNumber + " _owner=" + result.args._owner + " _spender=" + result.args._spender + " _amount=" +
+        result.args._amount.shift(-decimals));
+    });
+    approvalEvents.stopWatching();
+
+    var transferEvents = contract.Transfer({}, { fromBlock: crowdsaleFromBlock, toBlock: latestBlock });
+    i = 0;
+    transferEvents.watch(function (error, result) {
+      console.log("RESULT: Transfer " + i++ + " #" + result.blockNumber + ": _from=" + result.args._from + " _to=" + result.args._to +
+        " _amount=" + result.args._amount.shift(-decimals));
+    });
+    transferEvents.stopWatching();
+
+    var createMassEvents = contract.CreateMASS({}, { fromBlock: crowdsaleFromBlock, toBlock: latestBlock });
+    i = 0;
+    createMassEvents.watch(function (error, result) {
+      console.log("RESULT: CreateMASS " + i++ + " #" + result.blockNumber + ": _to=" + result.args._to +
+        " _value=" + result.args._value.shift(-decimals));
+    });
+    createMassEvents.stopWatching();
+
+    var updatedRewardsEvents = contract.UpdatedRewards({}, { fromBlock: crowdsaleFromBlock, toBlock: latestBlock });
+    i = 0;
+    updatedRewardsEvents.watch(function (error, result) {
+      console.log("RESULT: UpdatedRewards " + i++ + " #" + result.blockNumber + ": _to=" + result.args._to +
+        " _value=" + result.args._value.shift(-decimals));
+    });
+    updatedRewardsEvents.stopWatching();
+
+    var rewardSentEvents = contract.RewardSent({}, { fromBlock: crowdsaleFromBlock, toBlock: latestBlock });
+    i = 0;
+    rewardSentEvents.watch(function (error, result) {
+      console.log("RESULT: RewardSent " + i++ + " #" + result.blockNumber + ": _to=" + result.args._to +
+        " _value=" + result.args._value.shift(-decimals));
+    });
+    rewardSentEvents.stopWatching();
+
+    var blockRewardedEvents = contract.BlockRewarded({}, { fromBlock: crowdsaleFromBlock, toBlock: latestBlock });
+    i = 0;
+    blockRewardedEvents.watch(function (error, result) {
+      console.log("RESULT: BlockRewarded " + i++ + " #" + result.blockNumber + ": _remote=" + result.args._remote +
+        " _value=" + result.args._value.shift(-decimals));
+    });
+    blockRewardedEvents.stopWatching();
+
+    crowdsaleFromBlock = parseInt(latestBlock) + 1;
   }
 }
 

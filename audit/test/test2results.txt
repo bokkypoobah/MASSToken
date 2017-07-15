@@ -1,0 +1,132 @@
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       15.000000000000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - ETH Fee
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5 - MASS Promisory
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6 - ETH Promisory
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7 - MASS Bounty
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8 - ETH Bounty
+ 9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9 - Contrib #1
+10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #A - Contrib #2
+11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #B - Contrib #2
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                                    0.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+
+Deploy MASSToken - Cap 100 ETH 130,000 MASS
+mtAddress=0xd53380f36e665634cf48ec4745c7095cde2c9d7f gas=4000000 gasUsed=2314692 costETH=0.041664456 costUSD=8.560045814112 @ ETH/USD=205.452 gasPrice=18000000000 block=1678 txId=0xd1c4daab3b7a81a34ebd053d0d0420e6eb94f67784099430ec9d23e89cf0cdc7
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       25.041664456000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041664456000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - ETH Fee
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5 - MASS Promisory
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6 - ETH Promisory
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7 - MASS Bounty
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8 - ETH Bounty
+ 9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9 - Contrib #1
+10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #A - Contrib #2
+11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #B - Contrib #2
+12 0xd53380f36e665634cf48ec4745c7095cde2c9d7f        0.000000000000000000           0.000000000000000000 MASSToken
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                                    0.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Deploy MASSToken - Cap 100 ETH 130,000 MASS
+crowdsaleContractAddress=0xd53380f36e665634cf48ec4745c7095cde2c9d7f
+crowdsale.name=MASS
+crowdsale.symbol=MASS
+crowdsale.decimals=18
+crowdsale.version=1.0
+crowdsale.contractOwner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+crowdsale.ethFundDeposit=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+token.massFundDeposit=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0
+crowdsale.ethFeeDeposit=0xa44a08d3f6933c69212114bb66e2df1813651844
+crowdsale.massPromisoryDeposit=0xa55a151eb00fded1634d27d1127b4be4627079ea
+crowdsale.ethPromisoryDeposit=0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9
+crowdsale.massBountyDeposit=0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec
+crowdsale.ethBountyDeposit=0xa88a05d2b88283ce84c8325760b72a64591279a2
+crowdsale.isFinalized=false
+crowdsale.fundingStartBlock=1678
+crowdsale.fundingEndBlock=1776
+crowdsale.tokenExchangeRate=1000
+crowdsale.tokenCreationCap=61000000
+crowdsale.totalPreSale=0
+crowdsale.massFee=10
+crowdsale.promisoryFee=100
+crowdsale.icoSaleBonus20=200
+crowdsale.icoSaleBonus20Cap=5000000
+crowdsale.icoSaleBonus10=100
+crowdsale.icoSaleBonus10Cap=15000000
+token._totalSupply=0
+token.releaseFunds=false
+token.totalEthereum=0
+token.allowTransfers=false
+token.saleStart=1500139634 Sat, 15 Jul 2017 17:27:14 UTC
+
+Waiting until startBlock #1678 currentBlock=1678
+Waited until startBlock #1678 currentBlock=1679
+
+Crowdsale contribution
+contribution1Tx gas=400000 gasUsed=145424 costETH=0.002617632 costUSD=0.537797729664 @ ETH/USD=205.452 gasPrice=18000000000 block=1681 txId=0x622c19edc8169ac2ce9ccc997e9889d1d9d8ecd553c360d927293c0649ebdabb
+contribution2Tx gas=400000 gasUsed=85424 costETH=0.001537632 costUSD=0.315909569664 @ ETH/USD=205.452 gasPrice=18000000000 block=1681 txId=0x65d0f821e2ada70577cf6fe02ad582a9227687ca3ec53389782d8f806c159054
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       40.045819720000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041664456000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000       12000.000000000000000000 Account #3 - MASS Fund
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - ETH Fee
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000        1200.000000000000000000 Account #5 - MASS Promisory
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6 - ETH Promisory
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000        1200.000000000000000000 Account #7 - MASS Bounty
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8 - ETH Bounty
+ 9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0       -1.002617632000000000        1200.000000000000000000 Account #9 - Contrib #1
+10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756      -99.001537632000000000      118800.000000000000000000 Account #A - Contrib #2
+11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #B - Contrib #2
+12 0xd53380f36e665634cf48ec4745c7095cde2c9d7f      100.000000000000000000           0.000000000000000000 MASSToken
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                               134400.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Crowdsale contribution contrib1 1 ETH 1200 MASS
+PASS Crowdsale contribution contrib2 99 ETH 118,800 MASS
+crowdsaleContractAddress=0xd53380f36e665634cf48ec4745c7095cde2c9d7f
+crowdsale.name=MASS
+crowdsale.symbol=MASS
+crowdsale.decimals=18
+crowdsale.version=1.0
+crowdsale.contractOwner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+crowdsale.ethFundDeposit=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+token.massFundDeposit=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0
+crowdsale.ethFeeDeposit=0xa44a08d3f6933c69212114bb66e2df1813651844
+crowdsale.massPromisoryDeposit=0xa55a151eb00fded1634d27d1127b4be4627079ea
+crowdsale.ethPromisoryDeposit=0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9
+crowdsale.massBountyDeposit=0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec
+crowdsale.ethBountyDeposit=0xa88a05d2b88283ce84c8325760b72a64591279a2
+crowdsale.isFinalized=false
+crowdsale.fundingStartBlock=1678
+crowdsale.fundingEndBlock=1776
+crowdsale.tokenExchangeRate=1000
+crowdsale.tokenCreationCap=61000000
+crowdsale.totalPreSale=0
+crowdsale.massFee=10
+crowdsale.promisoryFee=100
+crowdsale.icoSaleBonus20=200
+crowdsale.icoSaleBonus20Cap=5000000
+crowdsale.icoSaleBonus10=100
+crowdsale.icoSaleBonus10Cap=15000000
+token._totalSupply=134400
+token.releaseFunds=false
+token.totalEthereum=0
+token.allowTransfers=false
+token.saleStart=1500139634 Sat, 15 Jul 2017 17:27:14 UTC
+CreateMASS 0 #1681: _to=0xa99a0ae3354c06b1459fd441a32a3f71005d7da0 _value=1200
+CreateMASS 1 #1681: _to=0xaaaa9de1e6c564446ebca0fd102d8bd92093c756 _value=118800
+

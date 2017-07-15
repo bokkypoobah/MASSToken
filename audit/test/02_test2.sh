@@ -104,7 +104,7 @@ loadScript("functions.js");
 var mtAbi = JSON.parse(mtOutput.contracts["$MASSTOKENTEMPSOL:MASSToken"].abi);
 var mtBin = "0x" + mtOutput.contracts["$MASSTOKENTEMPSOL:MASSToken"].bin;
 
-console.log("DATA: mtAbi=" + JSON.stringify(mtAbi));
+// console.log("DATA: mtAbi=" + JSON.stringify(mtAbi));
 
 unlockAccounts("$PASSWORD");
 printBalances();
@@ -113,24 +113,25 @@ console.log("RESULT: ");
 // -----------------------------------------------------------------------------
 // Deploy MASSToken
 // -----------------------------------------------------------------------------
-var mtMessage = "Deploy MASSToken - Cap 100 ETH 130,000 MTPS";
+var mtMessage = "Deploy MASSToken - Cap 100 ETH 130,000 MASS";
 console.log("RESULT: " + mtMessage);
 var startBlock = parseInt(eth.blockNumber) + 2;
 var endBlock = parseInt(eth.blockNumber) + 100;
 var mtContract = web3.eth.contract(mtAbi);
 var mtTx = null;
 var mtAddress = null;
-var mt = mtContract.new(ethFundAccount, startBlock, endBlock, {from: contractOwnerAccount, data: mtpsBin, gas: 4000000},
+var mt = mtContract.new(ethFundAccount, massFundAccount, ethFeeAccount, massPromisoryAccount, ethPromisoryAccount, massBountyAccount, 
+    ethBountyAccount, startBlock, endBlock, {from: contractOwnerAccount, data: mtBin, gas: 4000000},
   function(e, contract) {
     if (!e) {
       if (!contract.address) {
-        mtpsTx = contract.transactionHash;
+        mtTx = contract.transactionHash;
       } else {
-        mtpsAddress = contract.address;
-        addAccount(mtpsAddress, "MASSTokenPreSale");
-        addTokenContractAddressAndAbi(mtpsAddress, mtpsAbi);
-        addPreSaleContractAddressAndAbi(mtpsAddress, mtpsAbi);
-        printTxData("mtpsAddress=" + mtpsAddress, mtpsTx);
+        mtAddress = contract.address;
+        addAccount(mtAddress, "MASSToken");
+        addTokenContractAddressAndAbi(mtAddress, mtAbi);
+        addCrowdsaleContractAddressAndAbi(mtAddress, mtAbi);
+        printTxData("mtAddress=" + mtAddress, mtTx);
       }
     }
   }
@@ -138,56 +139,39 @@ var mt = mtContract.new(ethFundAccount, startBlock, endBlock, {from: contractOwn
 while (txpool.status.pending > 0) {
 }
 printBalances();
-failIfGasEqualsGasUsed(mtpsTx, mtMessage);
+failIfGasEqualsGasUsed(mtTx, mtMessage);
+printCrowdsaleContractDetails();
 console.log("RESULT: ");
 
-    function MASSToken(
-        address _ethFundDeposit,
-        address _massFundDeposit,
-        address _ethFeeDeposit,
-        address _massPromisoryDeposit,
-        address _ethPromisoryDeposit,
-        address _massBountyDeposit,
-        address _ethBountyDeposit,
-        uint256 _fundingStartBlock,
-        uint256 _fundingEndBlock)
 
-var ethFundAccount = eth.accounts[2];
-var ethFeeAccount = eth.accounts[3];
-var massPromisoryAccount = eth.accounts[4];
-var ethPromisoryAccount = eth.accounts[5];
-var massBountyAccount = eth.accounts[6];
-var ethBountyAccount = eth.accounts[7];
+// -----------------------------------------------------------------------------
+// Wait until startBlock 
+// -----------------------------------------------------------------------------
+console.log("RESULT: Waiting until startBlock #" + startBlock + " currentBlock=" + eth.blockNumber);
+while (eth.blockNumber <= startBlock) {
+}
+console.log("RESULT: Waited until startBlock #" + startBlock + " currentBlock=" + eth.blockNumber);
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var contribution1Message = "Crowdsale contribution";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + contribution1Message);
+var contribution1Tx = eth.sendTransaction({from: contrib1Account, to: mtAddress, gas: 400000, value: web3.toWei("1", "ether")});
+var contribution2Tx = eth.sendTransaction({from: contrib2Account, to: mtAddress, gas: 400000, value: web3.toWei("99", "ether")});
+while (txpool.status.pending > 0) {
+}
+printTxData("contribution1Tx", contribution1Tx);
+printTxData("contribution2Tx", contribution2Tx);
+printBalances();
+failIfGasEqualsGasUsed(contribution1Tx, contribution1Message + " contrib1 1 ETH 1200 MASS");
+failIfGasEqualsGasUsed(contribution2Tx, contribution1Message + " contrib2 99 ETH 118,800 MASS");
+printCrowdsaleContractDetails();
+console.log("RESULT: ");
 
 
 exit;
-
-// -----------------------------------------------------------------------------
-// Wait until presaleStartBlock 
-// -----------------------------------------------------------------------------
-console.log("RESULT: Waiting until presaleStartBlock #" + presaleStartBlock + " currentBlock=" + eth.blockNumber);
-while (eth.blockNumber <= presaleStartBlock) {
-}
-console.log("RESULT: Waited until presaleStartBlock #" + presaleStartBlock + " currentBlock=" + eth.blockNumber);
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var presaleContribution1Message = "PreSale contribution";
-// -----------------------------------------------------------------------------
-console.log("RESULT: " + presaleContribution1Message);
-var presaleContribution1Tx = eth.sendTransaction({from: account3, to: mtpsAddress, gas: 400000, value: web3.toWei("1", "ether")});
-var presaleContribution2Tx = eth.sendTransaction({from: account4, to: mtpsAddress, gas: 400000, value: web3.toWei("99", "ether")});
-while (txpool.status.pending > 0) {
-}
-printTxData("presaleContribution1Tx", presaleContribution1Tx);
-printTxData("presaleContribution2Tx", presaleContribution2Tx);
-printBalances();
-failIfGasEqualsGasUsed(presaleContribution1Tx, presaleContribution1Message + " ac3 1 ETH 1300 MTPS");
-failIfGasEqualsGasUsed(presaleContribution2Tx, presaleContribution1Message + " ac4 99 ETH 128,700 MTPS");
-printPreSaleContractDetails();
-console.log("RESULT: ");
-
 
 // -----------------------------------------------------------------------------
 var presaleContribution2Message = "PreSale contribution - Cap reached";

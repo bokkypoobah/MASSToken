@@ -1,6 +1,6 @@
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       25.000000000000000000           0.000000000000000000 Account #0 - Miner
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       20.000000000000000000           0.000000000000000000 Account #0 - Miner
  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
@@ -18,10 +18,10 @@
 
 
 Deploy MASSTokenPreSale - Cap 100 ETH 130,000 MTPS
-mtpsAddress=0x4ad3ae36d5ca6ede210385b8357a566a5ecea272 gas=4000000 gasUsed=470335 costETH=0.00846603 costUSD=1.73936279556 @ ETH/USD=205.452 gasPrice=18000000000 block=903 txId=0x551ac69602b0541e5a9f6451ae77f57c6d541dbe27ec38c76d3505797cb0c092
+mtpsAddress=0x32a391d90fed661cc45de0590654bef58f9d6c29 gas=4000000 gasUsed=470335 costETH=0.00846603 costUSD=1.73936279556 @ ETH/USD=205.452 gasPrice=18000000000 block=1275 txId=0xeb651179b25313362a37107d1bbe98bb67928f3109a80cc09bff9bd6e50b8650
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       35.008466030000000000           0.000000000000000000 Account #0 - Miner
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       30.008466030000000000           0.000000000000000000 Account #0 - Miner
  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
@@ -33,22 +33,22 @@ mtpsAddress=0x4ad3ae36d5ca6ede210385b8357a566a5ecea272 gas=4000000 gasUsed=47033
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9 - Contrib #1
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #A - Contrib #2
 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #B - Contrib #2
-12 0x4ad3ae36d5ca6ede210385b8357a566a5ecea272        0.000000000000000000           0.000000000000000000 MASSTokenPreSale
+12 0x32a391d90fed661cc45de0590654bef58f9d6c29        0.000000000000000000           0.000000000000000000 MASSTokenPreSale
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
                                                                                     0.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 PASS Deploy MASSTokenPreSale - Cap 100 ETH 130,000 MTPS
 
-Waiting until presaleStartBlock #903 currentBlock=903
-Waited until presaleStartBlock #903 currentBlock=904
+Waiting until presaleStartBlock #1275 currentBlock=1275
+Waited until presaleStartBlock #1275 currentBlock=1276
 
 PreSale contribution
-presaleContribution1Tx gas=400000 gasUsed=63287 costETH=0.001139166 costUSD=0.234043933032 @ ETH/USD=205.452 gasPrice=18000000000 block=906 txId=0xfc70d724da7a99ee0c8ac20858208980f1ebda1c4860ff99649b25c3f8b01d4b
-presaleContribution2Tx gas=400000 gasUsed=48287 costETH=0.000869166 costUSD=0.178571893032 @ ETH/USD=205.452 gasPrice=18000000000 block=906 txId=0xe9bac27dcdf7ad0fb16c8d826161719e51fbb22ae78cfa053db403323f4020ab
+presaleContribution1Tx gas=400000 gasUsed=63287 costETH=0.001139166 costUSD=0.234043933032 @ ETH/USD=205.452 gasPrice=18000000000 block=1278 txId=0x8c7b10b1f06e3573073b2f2d62e5396474df1ac9d7786571886b37c61b787c45
+presaleContribution2Tx gas=400000 gasUsed=48287 costETH=0.000869166 costUSD=0.178571893032 @ ETH/USD=205.452 gasPrice=18000000000 block=1278 txId=0xbf353ce5ce07a47b92433816a5537c28222c7a94d0e9a7069113eb0b587df036
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       50.010474362000000000           0.000000000000000000 Account #0 - Miner
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       45.010474362000000000           0.000000000000000000 Account #0 - Miner
  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
@@ -60,30 +60,30 @@ presaleContribution2Tx gas=400000 gasUsed=48287 costETH=0.000869166 costUSD=0.17
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0       -1.001139166000000000        1300.000000000000000000 Account #9 - Contrib #1
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756      -99.000869166000000000      128700.000000000000000000 Account #A - Contrib #2
 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #B - Contrib #2
-12 0x4ad3ae36d5ca6ede210385b8357a566a5ecea272      100.000000000000000000           0.000000000000000000 MASSTokenPreSale
+12 0x32a391d90fed661cc45de0590654bef58f9d6c29      100.000000000000000000           0.000000000000000000 MASSTokenPreSale
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
                                                                                130000.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 PASS PreSale contribution contrib1 1 ETH 1300 MTPS
 PASS PreSale contribution contrib2 99 ETH 128,700 MTPS
-preSaleContractAddress=0x4ad3ae36d5ca6ede210385b8357a566a5ecea272
+preSaleContractAddress=0x32a391d90fed661cc45de0590654bef58f9d6c29
 preSale.isEnded=false
 preSale.contractOwner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 preSale.massEthFund=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
-preSale.presaleStartBlock=903
-preSale.presaleEndBlock=1001
+preSale.presaleStartBlock=1275
+preSale.presaleEndBlock=1373
 preSale.tokenExchangeRate=1300
 preSale.tokenCap=130000
 preSale.totalSupply=130000
-CreatePreSale 0 #906 _to=0xa99a0ae3354c06b1459fd441a32a3f71005d7da0 _amount=1300
-CreatePreSale 1 #906 _to=0xaaaa9de1e6c564446ebca0fd102d8bd92093c756 _amount=128700
+CreatePreSale 0 #1278 _to=0xa99a0ae3354c06b1459fd441a32a3f71005d7da0 _amount=1300
+CreatePreSale 1 #1278 _to=0xaaaa9de1e6c564446ebca0fd102d8bd92093c756 _amount=128700
 
 PreSale contribution - Cap reached
-presaleContribution3Tx gas=400000 gasUsed=400000 costETH=0.0072 costUSD=1.4792544 @ ETH/USD=205.452 gasPrice=18000000000 block=908 txId=0x965213e951abb028e0951cb9ba02619c71a6e44fd83c7af24d07e59c8b45a065
+presaleContribution3Tx gas=400000 gasUsed=400000 costETH=0.0072 costUSD=1.4792544 @ ETH/USD=205.452 gasPrice=18000000000 block=1280 txId=0xd9cab4ba2ed03155c67a25f3b46b6bd16b2f052cf58b454abf1f83ba2ce51e9d
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       60.017674362000000000           0.000000000000000000 Account #0 - Miner
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       55.017674362000000000           0.000000000000000000 Account #0 - Miner
  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
@@ -95,27 +95,27 @@ presaleContribution3Tx gas=400000 gasUsed=400000 costETH=0.0072 costUSD=1.479254
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0       -1.001139166000000000        1300.000000000000000000 Account #9 - Contrib #1
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756      -99.000869166000000000      128700.000000000000000000 Account #A - Contrib #2
 11 0xabba43e7594e3b76afb157989e93c6621497fd4b       -0.007200000000000000           0.000000000000000000 Account #B - Contrib #2
-12 0x4ad3ae36d5ca6ede210385b8357a566a5ecea272      100.000000000000000000           0.000000000000000000 MASSTokenPreSale
+12 0x32a391d90fed661cc45de0590654bef58f9d6c29      100.000000000000000000           0.000000000000000000 MASSTokenPreSale
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
                                                                                130000.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 PASS PreSale contribution contrib3 1 ETH 1,300 MTPS fail
-preSaleContractAddress=0x4ad3ae36d5ca6ede210385b8357a566a5ecea272
+preSaleContractAddress=0x32a391d90fed661cc45de0590654bef58f9d6c29
 preSale.isEnded=false
 preSale.contractOwner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 preSale.massEthFund=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
-preSale.presaleStartBlock=903
-preSale.presaleEndBlock=1001
+preSale.presaleStartBlock=1275
+preSale.presaleEndBlock=1373
 preSale.tokenExchangeRate=1300
 preSale.tokenCap=130000
 preSale.totalSupply=130000
 
 End PreSale early - Cap reached. Called by MASS ETH Fund
-endPresaleTx gas=400000 gasUsed=33991 costETH=0.000611838 costUSD=0.125703340776 @ ETH/USD=205.452 gasPrice=18000000000 block=911 txId=0xc8aa37195ee626af00557954f258951f87bfad7721bb3dc2231cce6f6c726ced
+endPresaleTx gas=400000 gasUsed=33991 costETH=0.000611838 costUSD=0.125703340776 @ ETH/USD=205.452 gasPrice=18000000000 block=1282 txId=0xae9ada70755937d43e9976a8ee209b1275886ba8142bf2779bfda3b17407033f
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       75.018286200000000000           0.000000000000000000 Account #0 - Miner
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       65.018286200000000000           0.000000000000000000 Account #0 - Miner
  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       99.999388162000000000           0.000000000000000000 Account #2 - ETH Fund
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
@@ -127,18 +127,18 @@ endPresaleTx gas=400000 gasUsed=33991 costETH=0.000611838 costUSD=0.125703340776
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0       -1.001139166000000000        1300.000000000000000000 Account #9 - Contrib #1
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756      -99.000869166000000000      128700.000000000000000000 Account #A - Contrib #2
 11 0xabba43e7594e3b76afb157989e93c6621497fd4b       -0.007200000000000000           0.000000000000000000 Account #B - Contrib #2
-12 0x4ad3ae36d5ca6ede210385b8357a566a5ecea272        0.000000000000000000           0.000000000000000000 MASSTokenPreSale
+12 0x32a391d90fed661cc45de0590654bef58f9d6c29        0.000000000000000000           0.000000000000000000 MASSTokenPreSale
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
                                                                                130000.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 PASS End PreSale early - Cap reached. Called by MASS ETH Fund
-preSaleContractAddress=0x4ad3ae36d5ca6ede210385b8357a566a5ecea272
+preSaleContractAddress=0x32a391d90fed661cc45de0590654bef58f9d6c29
 preSale.isEnded=true
 preSale.contractOwner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 preSale.massEthFund=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
-preSale.presaleStartBlock=903
-preSale.presaleEndBlock=1001
+preSale.presaleStartBlock=1275
+preSale.presaleEndBlock=1373
 preSale.tokenExchangeRate=1300
 preSale.tokenCap=130000
 preSale.totalSupply=130000

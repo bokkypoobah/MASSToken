@@ -40,18 +40,23 @@ contract MASSToken is StandardToken {
     address public ethBountyDeposit; // deposit address for Eth to bounty programs.
 
     // crowdsale parameters
+    // BK Ok
     bool public isFinalized = false;              // switched to true in operational state
     // BK Next 2 Ok
     uint256 public fundingStartBlock = 0;
     uint256 public fundingEndBlock = 0;
+    // BK Next 2 Ok
     uint256 public constant tokenExchangeRate = 1000; // 1000 MASS (attograms) tokens per 1 ETH (wei)
     uint256 public constant tokenCreationCap =  61 * (10**6) * 10**decimals; // 61m MASS cap
+    // BK Next 3 Ok
     mapping (address => uint256) blockRewards; // Map block rewards to the remote Ethereum addresses.
     mapping (address => uint256) bonuses; // Map rewards to be paid out to the addresses.
     mapping (address => uint256) totalRewards; // Map total rewards earned for the addresses.
+    // BK Ok
     uint256 public totalPreSale = 0; // Store the number of tokens sold during presale.
     
     // presale/ICO bonues
+    // BK Next 6 Ok
     uint256 public constant massFee = 10; // 10%
     uint256 public constant promisoryFee = 100;  // 1%
     uint256 public constant icoSaleBonus20 = 200; // 20% more tokens for first 5m tokens on ICO
@@ -60,7 +65,9 @@ contract MASSToken is StandardToken {
     uint256 public constant icoSaleBonus10Cap = 15 * (10**6) * 10**decimals;
 
     // events
+    // BK NOTE - The LogRefund event is unused
     event LogRefund(address indexed _to, uint256 _value);
+    // BK Next 4 Ok
     event CreateMASS(address indexed _to, uint256 _value);
     event UpdatedRewards(address indexed _to, uint256 _value);
     event RewardSent(address indexed _to, uint256 _value);
@@ -81,19 +88,28 @@ contract MASSToken is StandardToken {
     {
       // BK Ok
       isFinalized = false;                   //controls pre through crowdsale state
+      // BK Ok
       ethFundDeposit = _ethFundDeposit;
+      // BK Ok
       ethFeeDeposit = _ethFeeDeposit;
+      // BK Ok
       massFundDeposit = _massFundDeposit;
+      // BK Ok
       massPromisoryDeposit = _massPromisoryDeposit;
+      // BK Ok
       ethPromisoryDeposit = _ethPromisoryDeposit;
+      // BK Ok
       massBountyDeposit = _massBountyDeposit;
+      // BK Ok
       ethBountyDeposit = _ethBountyDeposit;
       // BK Next 2 Ok
       fundingStartBlock = _fundingStartBlock;
       fundingEndBlock = _fundingEndBlock;
+      // BK Ok
       _totalSupply = 0;
       // BK Ok - Transfers are initially disabled
       allowTransfers = false; // No transfers during ico.
+      // BK Ok
       saleStart = now;
       // BK Ok - The contract owner
       contractOwner = msg.sender;

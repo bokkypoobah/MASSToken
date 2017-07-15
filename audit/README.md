@@ -119,6 +119,10 @@ the deployment parameters are correctly set, including the constant parameters.
   * As there are no refunds in this non-transferable token contract, it would be slightly safer to move the ETH contributed by participants
     directly into the `massEthFund` wallet, when each contribution is made.
 
+* Crowdsale Contracts
+
+  * There are no minimum funding goal, and no caps
+
 <br />
 
 <hr />
