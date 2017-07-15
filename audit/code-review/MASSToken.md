@@ -15,15 +15,22 @@ import "./SafeMath.sol";
 //Gives devs a cut of eth and tokens.
 //Initial ICO design based off BAT (known working and secure).
 contract MASSToken is StandardToken {
+        // BK Ok
 		using SafeMath for uint256;
 		
     // metadata
+    // BK Ok
     string public constant name = "MASS";
+    // BK Ok
     string public constant symbol = "MASS";
+    // BK NOTE - This should be `uint8` instead of `uint256` but contracts that expect `uint8` seem to be working with the `uint256` returned
+    // BK Ok
     uint256 public constant decimals = 18;
+    // BK Ok
     string public version = "1.0";
 
     // contracts
+    // BK Ok
     address public contractOwner;
     address public ethFundDeposit;  // deposit address for ETH for MASS Ltd. Investment/Contract
     address public ethFeeDeposit;   // deposit address for ETH for MASS Ltd. token fees
@@ -34,6 +41,7 @@ contract MASSToken is StandardToken {
 
     // crowdsale parameters
     bool public isFinalized = false;              // switched to true in operational state
+    // BK Next 2 Ok
     uint256 public fundingStartBlock = 0;
     uint256 public fundingEndBlock = 0;
     uint256 public constant tokenExchangeRate = 1000; // 1000 MASS (attograms) tokens per 1 ETH (wei)
@@ -59,6 +67,7 @@ contract MASSToken is StandardToken {
     event BlockRewarded(address indexed _remote, uint256 _value);
     
     // constructor
+    // BK Ok - Constructor
     function MASSToken(
         address _ethFundDeposit,
         address _massFundDeposit,
@@ -70,6 +79,7 @@ contract MASSToken is StandardToken {
         uint256 _fundingStartBlock,
         uint256 _fundingEndBlock)
     {
+      // BK Ok
       isFinalized = false;                   //controls pre through crowdsale state
       ethFundDeposit = _ethFundDeposit;
       ethFeeDeposit = _ethFeeDeposit;
@@ -78,11 +88,14 @@ contract MASSToken is StandardToken {
       ethPromisoryDeposit = _ethPromisoryDeposit;
       massBountyDeposit = _massBountyDeposit;
       ethBountyDeposit = _ethBountyDeposit;
+      // BK Next 2 Ok
       fundingStartBlock = _fundingStartBlock;
       fundingEndBlock = _fundingEndBlock;
       _totalSupply = 0;
+      // BK Ok - Transfers are initially disabled
       allowTransfers = false; // No transfers during ico.
       saleStart = now;
+      // BK Ok - The contract owner
       contractOwner = msg.sender;
     }
     
@@ -90,6 +103,7 @@ contract MASSToken is StandardToken {
     // Instead, we'll have to automatically (via a script) import presale addresses and values.
     // These can be verified and checked against the presale contract.
     function releasePreSaleTokens(address _address, uint256 _amount, uint256 _bonus, uint256 _massFund, uint256 _bountyAndPriorFund) external {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         if (block.number > fundingStartBlock) throw; // Do not allow this one the ICO starts.
         balances[_address] = _amount;
@@ -107,24 +121,28 @@ contract MASSToken is StandardToken {
 
     // Allow the contract owner to add the funds from the presale without buying tokens.
     function addPreSaleFunds() payable external {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         if (isFinalized) throw;
     }
 
     /// @dev Increase entire pool's worth whenever we get a unstaked block rewards.
     function increaseTotalEthereumBalance(uint256 _amount) {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         totalEthereum += _amount;
     }
 
     /// @dev Decrease entire pool's worth whenever we burn.
     function decreaseTotalEthereumBalance(uint256 _amount) {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         totalEthereum -= _amount;
     }
     
     /// @dev Set the ICO funding period once presale is over.
     function setFundingPeriod(uint256 _fundingStartBlock, uint256 _fundingEndBlock) {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         fundingStartBlock = _fundingStartBlock;
         fundingEndBlock = _fundingEndBlock;
@@ -132,6 +150,7 @@ contract MASSToken is StandardToken {
     
     /// @dev The backend sets the amount of rewards per address.
     function setRewards(address _to, uint256 _value) {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         rewards[_to] += _value;
         totalRewards[_to] += _value;
@@ -145,6 +164,7 @@ contract MASSToken is StandardToken {
     
     /// @dev Mark the reward as sent and decrease it from the balance. Rewards are sent out of contract to save on gas.
     function sentReward(address _to, uint256 _value) {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         rewards[_to] -= _value;
         RewardSent(_to, _value);
@@ -152,15 +172,20 @@ contract MASSToken is StandardToken {
     
     /// @dev Increase and decrease block rewards paid out to our remote wallets.
     function updateBlockRewards(address _remote, uint256 _value) {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         blockRewards[_remote] += _value;
         BlockRewarded(_remote, _value);
     }
     
     /// @dev Allow MASS Ltd. to release vested MASS tokens after 1 year.
+    // BK Ok - This function releases MASS's tokens and is only enabled after 1 year
     function releaseVestedMASS() {
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
+        // BK Ok - The tokens can only be released after 365 days
         if (now >= saleStart + (365 days)) {
+            // BK Ok
             releaseFunds = true;
         }
     }
@@ -174,6 +199,7 @@ contract MASSToken is StandardToken {
     // Sends eth to ethFundAddress.
     function sendEth(uint256 _value) external {
         if (!isFinalized) throw;
+        // BK Ok - Only the contract owner can call this
         require (msg.sender == contractOwner);
         if(!ethFundDeposit.send(_value)) throw;
     }
@@ -232,10 +258,16 @@ contract MASSToken is StandardToken {
 
     /// @dev Ends the funding period and sends the ETH home
     function finalize() external {
+      // BK Ok - Cannot finalise the crowdsale more than once
       if (isFinalized) throw;
+      // BK Ok - Only the contract owner can execute this function
       require (msg.sender == contractOwner); // locks finalize to the ultimate ETH owner
+      // BK NOTE - (block.number <= fundingEndBlock && _totalSupply != tokenCreationCap) is the same as
+      //           !(block.number > fundingEndBlock || _totalSupply == tokenCreationCap)
+      // BK Ok - The contract owner can finalise after the crowdsale end date, or earlier if the funding cap is reached
       if(block.number <= fundingEndBlock && _totalSupply != tokenCreationCap) throw;
       // move to operational
+      // BK Ok
       isFinalized = true;
       uint256 poolBalance = this.balance; // Store the eth balance of the entire pool.
       uint256 feeBalance = poolBalance.div(massFee);
@@ -253,33 +285,51 @@ contract MASSToken is StandardToken {
     }
     
     /// @dev Disable transfers of MASS during payouts.
+    // BK Ok
     function disableTransfers() {
+        // BK Ok - This function can only be executed after the crowdsale is finalised
         if (!isFinalized) throw;
+        // BK Ok - Only the contract owner can execute this function
         require (msg.sender == contractOwner);
+        // BK Ok - Disable transfers
         allowTransfers = false;
     }
     
     /// @dev Allow transfers after MASS payouts.
+    // BK Ok
     function enableTransfers() {
+        // BK Ok - This function can only be executed after the crowdsale is finalised
         if (!isFinalized) throw;
+        // BK Ok - Only the contract owner can execute this function
         require (msg.sender == contractOwner);
+        // BK Ok - Enable transfers
         allowTransfers = true;
     }
 
     /// @dev Change ownership of contract in case of emergency.
+    // BK NOTE - This changeOwnership should also use the acceptOwnership pattern to confirm the change in ownership
+    //           to reduce any errors in the new owner address, if there needs to be a change in ownership
+    // BK Ok
     function changeOwnership(address newOwner) {
+        // BK Ok - Only the current contract owner can execute this function
         require (msg.sender == contractOwner);
+        // BK Ok - Change ownership to the new owner
         contractOwner = newOwner;
     }
 
     /// @dev Internal function to prevent contracts from purchasing tokens.
      // Borrowed from StatusContributions.sol (SNT)
+    // BK Ok
     function isContract(address _address) constant internal returns (bool) {
+        // BK Ok
         if (_address == 0) return false;
+        // BK Ok
         uint256 size;
+        // BK Next 3 Ok
         assembly {
             size := extcodesize(_address)
         }
+        // BK Ok
         return (size > 0);
     }
 }

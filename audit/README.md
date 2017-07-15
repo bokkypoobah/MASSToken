@@ -28,7 +28,10 @@ TODO Commit [https://github.com/mass-ltd/MASSToken](https://github.com/mass-ltd/
 
 ## Recommendation
 
-* [ ] TODO - If any.
+* LOW IMPORTANCE - The `MASSToken.changeOwnership(...)` should use the `acceptOwnership(...)` pattern to confirm the change in ownership. This
+  is just for additional safety if the contract ownership needs to be changed.
+
+* LOW IMPORTANCE - The crowdsale contracts should require the use of Solidity 0.4.11 or above instead of just 0.4.10 .
 
 <br />
 
@@ -88,7 +91,8 @@ the deployment parameters are correctly set, including the constant parameters.
 
 ## Trustlessness Of The Crowdsale Contract
 
-* [ ] TODO - Evaluate
+* MASS Cloud Ltd can enable and disable the token transfers in the MASSToken token contract at any time using the 
+  `MASSToken.enableTransfers()` and `MASSToken.disableTransfers()`, and these functions are enabled once the crowdsale is finalised.
 
 <br />
 
@@ -106,7 +110,14 @@ the deployment parameters are correctly set, including the constant parameters.
 
 ## Notes
 
-* TODO
+* PreSale Contracts
+
+  * `MASSTokenPreSale.decimals` and `MASSToken.decimals` should be declared as *uint8* instead of *uint256*. A number of token contracts
+    already use *uint256* and these token contracts seem to be working correctly with other contracts that call the token contract's
+    `decimals` and being returned a *uint256* instead of a *uint8*.
+
+  * As there are no refunds in this non-transferable token contract, it would be slightly safer to move the ETH contributed by participants
+    directly into the `massEthFund` wallet, when each contribution is made.
 
 <br />
 
@@ -122,18 +133,18 @@ See [test/README.md](test/README.md), [test/01_test1.sh](test/01_test1.sh) and [
 
 ## Code Review
 
-* [presale/MASSTokenPreSale.md](code-review/presale/MASSTokenPreSale.md)
-  * contract MASSTokenPreSale is PreSaleToken
-* [presale/PreSaleToken.md](code-review/presale/PreSaleToken.md)
-  * contract Token
-  * contract PreSaleToken is Token
+* [x] [presale/MASSTokenPreSale.md](code-review/presale/MASSTokenPreSale.md)
+  * [x] contract MASSTokenPreSale is PreSaleToken
+* [x] [presale/PreSaleToken.md](code-review/presale/PreSaleToken.md)
+  * [x] contract Token
+  * [x] contract PreSaleToken is Token
 * [MASSToken.md](code-review/MASSToken.md)
   * contract MASSToken is StandardToken
 * [StandardToken.md](code-review/StandardToken.md)
-  * contract Token
+  * [x] contract Token
   * contract StandardToken is Token
-* [SafeMath.md](code-review/SafeMath.md)
-  * library SafeMath
+* [x] [SafeMath.md](code-review/SafeMath.md)
+  * [x] library SafeMath
 
 <br />
 
