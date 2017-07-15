@@ -2,7 +2,7 @@ Welcome to the Geth JavaScript console!
 
 instance: Geth/v1.6.7-stable-ab5646c5/darwin-amd64/go1.8.3
 coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
-at block: 1673 (Sun, 16 Jul 2017 03:26:47 AEST)
+at block: 1 (Sun, 16 Jul 2017 09:36:03 AEST)
  datadir: /Users/bok/Projects/MASSTokenAudit/audit/test/testchain
  modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
@@ -24,7 +24,7 @@ undefined
 > 
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       15.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       20.000000000000000000           0.000000000000000000 Account #0 - Miner
 RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
@@ -87,11 +87,11 @@ undefined
 ... 
 undefined
 > 
-RESULT: mtAddress=0xd53380f36e665634cf48ec4745c7095cde2c9d7f gas=4000000 gasUsed=2314692 costETH=0.041664456 costUSD=8.560045814112 @ ETH/USD=205.452 gasPrice=18000000000 block=1678 txId=0xd1c4daab3b7a81a34ebd053d0d0420e6eb94f67784099430ec9d23e89cf0cdc7
+RESULT: mtAddress=0x90d8927407c79c4a28ee879b821c76fc9bcc2688 gas=4000000 gasUsed=2314564 costETH=0.041662152 costUSD=8.559572452704 @ ETH/USD=205.452 gasPrice=18000000000 block=7 txId=0x6164e45e4f0a4466eb7c6be65025c4657861093f7231f281836a17fa369abbf2
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       25.041664456000000000           0.000000000000000000 Account #0 - Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041664456000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       30.041662152000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041662152000000000           0.000000000000000000 Account #1 - Contract Owner
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - MASS Fund
 RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - ETH Fee
@@ -102,7 +102,7 @@ RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.00000000000000000
 RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9 - Contrib #1
 RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.000000000000000000 Account #A - Contrib #2
 RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #B - Contrib #2
-RESULT: 12 0xd53380f36e665634cf48ec4745c7095cde2c9d7f        0.000000000000000000           0.000000000000000000 MASSToken
+RESULT: 12 0x90d8927407c79c4a28ee879b821c76fc9bcc2688        0.000000000000000000           0.000000000000000000 MASSToken
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT:                                                                                     0.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
@@ -112,7 +112,7 @@ undefined
 RESULT: PASS Deploy MASSToken - Cap 100 ETH 130,000 MASS
 1
 > 
-RESULT: crowdsaleContractAddress=0xd53380f36e665634cf48ec4745c7095cde2c9d7f
+RESULT: crowdsaleContractAddress=0x90d8927407c79c4a28ee879b821c76fc9bcc2688
 RESULT: crowdsale.name=MASS
 RESULT: crowdsale.symbol=MASS
 RESULT: crowdsale.decimals=18
@@ -126,8 +126,8 @@ RESULT: crowdsale.ethPromisoryDeposit=0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9
 RESULT: crowdsale.massBountyDeposit=0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec
 RESULT: crowdsale.ethBountyDeposit=0xa88a05d2b88283ce84c8325760b72a64591279a2
 RESULT: crowdsale.isFinalized=false
-RESULT: crowdsale.fundingStartBlock=1678
-RESULT: crowdsale.fundingEndBlock=1776
+RESULT: crowdsale.fundingStartBlock=7
+RESULT: crowdsale.fundingEndBlock=105
 RESULT: crowdsale.tokenExchangeRate=1000
 RESULT: crowdsale.tokenCreationCap=61000000
 RESULT: crowdsale.totalPreSale=0
@@ -141,7 +141,7 @@ RESULT: token._totalSupply=0
 RESULT: token.releaseFunds=false
 RESULT: token.totalEthereum=0
 RESULT: token.allowTransfers=false
-RESULT: token.saleStart=1500139634 Sat, 15 Jul 2017 17:27:14 UTC
+RESULT: token.saleStart=1500161787 Sat, 15 Jul 2017 23:36:27 UTC
 undefined
 > 
 RESULT: 
@@ -155,13 +155,13 @@ undefined
 > 
 undefined
 > 
-RESULT: Waiting until startBlock #1678 currentBlock=1678
+RESULT: Waiting until startBlock #7 currentBlock=8
 undefined
 > 
 ... 
 undefined
 > 
-RESULT: Waited until startBlock #1678 currentBlock=1679
+RESULT: Waited until startBlock #7 currentBlock=8
 undefined
 > 
 RESULT: 
@@ -185,16 +185,16 @@ undefined
 ... 
 undefined
 > 
-RESULT: contribution1Tx gas=400000 gasUsed=145424 costETH=0.002617632 costUSD=0.537797729664 @ ETH/USD=205.452 gasPrice=18000000000 block=1681 txId=0x622c19edc8169ac2ce9ccc997e9889d1d9d8ecd553c360d927293c0649ebdabb
+RESULT: contribution1Tx gas=400000 gasUsed=145424 costETH=0.002617632 costUSD=0.537797729664 @ ETH/USD=205.452 gasPrice=18000000000 block=10 txId=0xe61c8c02fbf5a9c7ccd8fc37f0bc7604ef8351499a88590af38512822c8cdab2
 undefined
 > 
-RESULT: contribution2Tx gas=400000 gasUsed=85424 costETH=0.001537632 costUSD=0.315909569664 @ ETH/USD=205.452 gasPrice=18000000000 block=1681 txId=0x65d0f821e2ada70577cf6fe02ad582a9227687ca3ec53389782d8f806c159054
+RESULT: contribution2Tx gas=400000 gasUsed=85424 costETH=0.001537632 costUSD=0.315909569664 @ ETH/USD=205.452 gasPrice=18000000000 block=10 txId=0x48276e2cd59eaded789455516c16a017c40f77faf73b20c8a033b61d9e51ad9a
 undefined
 > 
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       40.045819720000000000           0.000000000000000000 Account #0 - Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041664456000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       45.045817416000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041662152000000000           0.000000000000000000 Account #1 - Contract Owner
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - ETH Fund
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000       12000.000000000000000000 Account #3 - MASS Fund
 RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - ETH Fee
@@ -205,7 +205,7 @@ RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.00000000000000000
 RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0       -1.002617632000000000        1200.000000000000000000 Account #9 - Contrib #1
 RESULT: 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756      -99.001537632000000000      118800.000000000000000000 Account #A - Contrib #2
 RESULT: 11 0xabba43e7594e3b76afb157989e93c6621497fd4b        0.000000000000000000           0.000000000000000000 Account #B - Contrib #2
-RESULT: 12 0xd53380f36e665634cf48ec4745c7095cde2c9d7f      100.000000000000000000           0.000000000000000000 MASSToken
+RESULT: 12 0x90d8927407c79c4a28ee879b821c76fc9bcc2688      100.000000000000000000           0.000000000000000000 MASSToken
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT:                                                                                134400.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
@@ -218,7 +218,7 @@ RESULT: PASS Crowdsale contribution contrib1 1 ETH 1200 MASS
 RESULT: PASS Crowdsale contribution contrib2 99 ETH 118,800 MASS
 1
 > 
-RESULT: crowdsaleContractAddress=0xd53380f36e665634cf48ec4745c7095cde2c9d7f
+RESULT: crowdsaleContractAddress=0x90d8927407c79c4a28ee879b821c76fc9bcc2688
 RESULT: crowdsale.name=MASS
 RESULT: crowdsale.symbol=MASS
 RESULT: crowdsale.decimals=18
@@ -232,8 +232,8 @@ RESULT: crowdsale.ethPromisoryDeposit=0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9
 RESULT: crowdsale.massBountyDeposit=0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec
 RESULT: crowdsale.ethBountyDeposit=0xa88a05d2b88283ce84c8325760b72a64591279a2
 RESULT: crowdsale.isFinalized=false
-RESULT: crowdsale.fundingStartBlock=1678
-RESULT: crowdsale.fundingEndBlock=1776
+RESULT: crowdsale.fundingStartBlock=7
+RESULT: crowdsale.fundingEndBlock=105
 RESULT: crowdsale.tokenExchangeRate=1000
 RESULT: crowdsale.tokenCreationCap=61000000
 RESULT: crowdsale.totalPreSale=0
@@ -247,9 +247,9 @@ RESULT: token._totalSupply=134400
 RESULT: token.releaseFunds=false
 RESULT: token.totalEthereum=0
 RESULT: token.allowTransfers=false
-RESULT: token.saleStart=1500139634 Sat, 15 Jul 2017 17:27:14 UTC
-RESULT: CreateMASS 0 #1681: _to=0xa99a0ae3354c06b1459fd441a32a3f71005d7da0 _value=1200
-RESULT: CreateMASS 1 #1681: _to=0xaaaa9de1e6c564446ebca0fd102d8bd92093c756 _value=118800
+RESULT: token.saleStart=1500161787 Sat, 15 Jul 2017 23:36:27 UTC
+RESULT: CreateMASS 0 #10: _to=0xa99a0ae3354c06b1459fd441a32a3f71005d7da0 _value=1200
+RESULT: CreateMASS 1 #10: _to=0xaaaa9de1e6c564446ebca0fd102d8bd92093c756 _value=118800
 undefined
 > 
 RESULT: 
