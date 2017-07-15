@@ -2,6 +2,6 @@
 .project
 private
 private/*
-test/testchain/geth*
-test/testchain/history*
+audit/test/testchain/geth*
+audit/test/testchain/history*
 .settings
