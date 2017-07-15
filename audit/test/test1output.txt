@@ -2,7 +2,7 @@ Welcome to the Geth JavaScript console!
 
 instance: Geth/v1.6.7-stable-ab5646c5/darwin-amd64/go1.8.3
 coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
-at block: 148 (Sat, 15 Jul 2017 20:02:03 AEST)
+at block: 262 (Sun, 16 Jul 2017 01:34:50 AEST)
  datadir: /Users/bok/Projects/MASSTokenAudit/audit/test/testchain
  modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
@@ -44,9 +44,295 @@ undefined
 > 
 undefined
 > 
-DATA: stAbi=[{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"totalSupply","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"allowTransfers","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"unstake","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"burn","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceStaked","outputs":[{"name":"staked","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"releaseFunds","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalEthereum","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"massFundDeposit","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"stake","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"saleStart","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Stake","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"UnStake","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Burn","type":"event"}]
 undefined
 > 
 undefined
+> 
+> 
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       40.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - MASS Eth Fund
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                                     0.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Deploy MASSTokenPreSale - Cap 100 ETH 130,000 MTPS
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+...... 
+......... 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+......... 
+...... 
+... 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: mtpsAddress=0x1029670471248c1046263e47c431a061a7fa34ab gas=4000000 gasUsed=470335 costETH=0.00846603 costUSD=1.73936279556 @ ETH/USD=205.452 gasPrice=18000000000 block=272 txId=0x2e742cd25860fee0db9c95f82be1c30500057ce2a1de4f75be172bdc79cf0d5c
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       50.008466030000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - MASS Eth Fund
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0x1029670471248c1046263e47c431a061a7fa34ab        0.000000000000000000           0.000000000000000000 MASSTokenPreSale
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                                     0.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Deploy MASSTokenPreSale - Cap 100 ETH 130,000 MTPS
+1
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Waiting until presaleStartBlock #272 currentBlock=272
+undefined
+> 
+... 
+undefined
+> 
+RESULT: Waited until presaleStartBlock #272 currentBlock=273
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: PreSale contribution
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: presaleContribution1Tx gas=400000 gasUsed=63287 costETH=0.001139166 costUSD=0.234043933032 @ ETH/USD=205.452 gasPrice=18000000000 block=275 txId=0xe2cd4130495e086044c02a203b7cb3f375a7af9e6237ccdfb910abeb073251f7
+undefined
+> 
+RESULT: presaleContribution2Tx gas=400000 gasUsed=48287 costETH=0.000869166 costUSD=0.178571893032 @ ETH/USD=205.452 gasPrice=18000000000 block=275 txId=0x2f7fb25831d72dd1c08aefebd509a4736ab751ff8b8d319f499085fd003862e3
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       65.010474362000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - MASS Eth Fund
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0       -1.001139166000000000        1300.000000000000000000 Account #3
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844      -99.000869166000000000      128700.000000000000000000 Account #4
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0x1029670471248c1046263e47c431a061a7fa34ab      100.000000000000000000           0.000000000000000000 MASSTokenPreSale
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                                130000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS PreSale contribution ac3 1 ETH 1300 MTPS
+1
+> 
+RESULT: PASS PreSale contribution ac4 99 ETH 128,700 MTPS
+1
+> 
+RESULT: preSaleContractAddress=0x1029670471248c1046263e47c431a061a7fa34ab
+RESULT: preSale.isEnded=false
+RESULT: preSale.contractOwner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: preSale.massEthFund=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: preSale.presaleStartBlock=272
+RESULT: preSale.presaleEndBlock=370
+RESULT: preSale.tokenExchangeRate=1300
+RESULT: preSale.tokenCap=130000
+RESULT: preSale.totalSupply=130000
+RESULT: CreatePreSale 0 #275 _to=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _amount=1300
+RESULT: CreatePreSale 1 #275 _to=0xa44a08d3f6933c69212114bb66e2df1813651844 _amount=128700
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: PreSale contribution - Cap reached
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: presaleContribution3Tx gas=400000 gasUsed=400000 costETH=0.0072 costUSD=1.4792544 @ ETH/USD=205.452 gasPrice=18000000000 block=278 txId=0xb0d8441c98f56b4796ba44766de04b69df9b40615b417ddb6fbf7211042432a8
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       80.017674362000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - MASS Eth Fund
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0       -1.001139166000000000        1300.000000000000000000 Account #3
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844      -99.000869166000000000      128700.000000000000000000 Account #4
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea       -0.007200000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0x1029670471248c1046263e47c431a061a7fa34ab      100.000000000000000000           0.000000000000000000 MASSTokenPreSale
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                                130000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS PreSale contribution ac5 1 ETH 1,300 MTPS fail
+1
+> 
+RESULT: preSaleContractAddress=0x1029670471248c1046263e47c431a061a7fa34ab
+RESULT: preSale.isEnded=false
+RESULT: preSale.contractOwner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: preSale.massEthFund=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: preSale.presaleStartBlock=272
+RESULT: preSale.presaleEndBlock=370
+RESULT: preSale.tokenExchangeRate=1300
+RESULT: preSale.tokenCap=130000
+RESULT: preSale.totalSupply=130000
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: End PreSale early - Cap reached. Called by MASS ETH Fund
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: endPresaleTx gas=400000 gasUsed=33991 costETH=0.000611838 costUSD=0.125703340776 @ ETH/USD=205.452 gasPrice=18000000000 block=280 txId=0xff7b072a74f4cd53c8a188ae05565d9d8a62f84b0d15c8feac5cec7eb4c9d66c
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       90.018286200000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008466030000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       99.999388162000000000           0.000000000000000000 Account #2 - MASS Eth Fund
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0       -1.001139166000000000        1300.000000000000000000 Account #3
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844      -99.000869166000000000      128700.000000000000000000 Account #4
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea       -0.007200000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.000000000000000000 Account #9
+RESULT: 10 0x1029670471248c1046263e47c431a061a7fa34ab        0.000000000000000000           0.000000000000000000 MASSTokenPreSale
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                                130000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS End PreSale early - Cap reached. Called by MASS ETH Fund
+1
+> 
+RESULT: preSaleContractAddress=0x1029670471248c1046263e47c431a061a7fa34ab
+RESULT: preSale.isEnded=true
+RESULT: preSale.contractOwner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: preSale.massEthFund=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: preSale.presaleStartBlock=272
+RESULT: preSale.presaleEndBlock=370
+RESULT: preSale.tokenExchangeRate=1300
+RESULT: preSale.tokenCap=130000
+RESULT: preSale.totalSupply=130000
+undefined
+> 
+RESULT: 
+undefined
+> 
 > 
 > 

@@ -96,8 +96,9 @@ printf "ENDTIME                 = '$ENDTIME' '$ENDTIME_S'\n"
 `cp $CONTRACTSDIR/$STANDARDTOKENSOL $STANDARDTOKENTEMPSOL`
 `cp $CONTRACTSDIR/$SAFEMATHSOL $SAFEMATHTEMPSOL`
 
-# --- Modify dates ---
-#`perl -pi -e "s/startTime \= 1498140000;.*$/startTime = $STARTTIME; \/\/ $STARTTIME_S/" $FUNFAIRSALETEMPSOL`
+# --- Modify parameters ---
+`perl -pi -e "s/tokenCap \= 13 \* \(10\*\*6\)/tokenCap \= 13 \* \(10\*\*4\)/" $MASSTOKENPRESALETEMPSOL`
+#`perl -pi -e "s/tokenExchangeRate \= 1300/tokenExchangeRate \= 13/" $MASSTOKENPRESALETEMPSOL`
 #`perl -pi -e "s/deadline \=  1499436000;.*$/deadline = $ENDTIME; \/\/ $ENDTIME_S/" $FUNFAIRSALETEMPSOL`
 #`perl -pi -e "s/\/\/\/ \@return total amount of tokens.*$/function overloadedTotalSupply() constant returns (uint256) \{ return totalSupply; \}/" $DAOCASINOICOTEMPSOL`
 #`perl -pi -e "s/BLOCKS_IN_DAY \= 5256;*$/BLOCKS_IN_DAY \= $BLOCKSINDAY;/" $DAOCASINOICOTEMPSOL`
@@ -152,30 +153,31 @@ var stBin = "0x" + stOutput.contracts["$STANDARDTOKENTEMPSOL:StandardToken"].bin
 // console.log("DATA: stAbi=" + JSON.stringify(stAbi));
 // console.log("DATA: psBin=" + psBin);
 
-exit;
-
-
 unlockAccounts("$PASSWORD");
 printBalances();
 console.log("RESULT: ");
 
 // -----------------------------------------------------------------------------
-// Deploy MiniMeTokenFactory
+// Deploy MASSTokenPreSale
 // -----------------------------------------------------------------------------
-var mmtfMessage = "Deploy MiniMeTokenFactory";
-console.log("RESULT: " + mmtfMessage);
-var mmtfContract = web3.eth.contract(mmtfAbi);
-var mmtfTx = null;
-var mmtfAddress = null;
-var mmtf = mmtfContract.new({from: contractOwnerAccount, data: mmtfBin, gas: 4000000},
+var mtpsMessage = "Deploy MASSTokenPreSale - Cap 100 ETH 130,000 MTPS";
+console.log("RESULT: " + mtpsMessage);
+var presaleStartBlock = parseInt(eth.blockNumber) + 2;
+var presaleEndBlock = parseInt(eth.blockNumber) + 100;
+var mtpsContract = web3.eth.contract(mtpsAbi);
+var mtpsTx = null;
+var mtpsAddress = null;
+var mtps = mtpsContract.new(massEthFund, presaleStartBlock, presaleEndBlock, {from: contractOwnerAccount, data: mtpsBin, gas: 4000000},
   function(e, contract) {
     if (!e) {
       if (!contract.address) {
-        mmtfTx = contract.transactionHash;
+        mtpsTx = contract.transactionHash;
       } else {
-        mmtfAddress = contract.address;
-        addAccount(mmtfAddress, "MiniMeTokenFactory");
-        printTxData("mmtfAddress=" + mmtfAddress, mmtfTx);
+        mtpsAddress = contract.address;
+        addAccount(mtpsAddress, "MASSTokenPreSale");
+        addTokenContractAddressAndAbi(mtpsAddress, mtpsAbi);
+        addPreSaleContractAddressAndAbi(mtpsAddress, mtpsAbi);
+        printTxData("mtpsAddress=" + mtpsAddress, mtpsTx);
       }
     }
   }
@@ -183,9 +185,66 @@ var mmtf = mmtfContract.new({from: contractOwnerAccount, data: mmtfBin, gas: 400
 while (txpool.status.pending > 0) {
 }
 printBalances();
-failIfGasEqualsGasUsed(mmtfTx, mmtfMessage);
+failIfGasEqualsGasUsed(mtpsTx, mtpsMessage);
 console.log("RESULT: ");
 
+
+// -----------------------------------------------------------------------------
+// Wait until presaleStartBlock 
+// -----------------------------------------------------------------------------
+console.log("RESULT: Waiting until presaleStartBlock #" + presaleStartBlock + " currentBlock=" + eth.blockNumber);
+while (eth.blockNumber <= presaleStartBlock) {
+}
+console.log("RESULT: Waited until presaleStartBlock #" + presaleStartBlock + " currentBlock=" + eth.blockNumber);
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var presaleContribution1Message = "PreSale contribution";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + presaleContribution1Message);
+var presaleContribution1Tx = eth.sendTransaction({from: account3, to: mtpsAddress, gas: 400000, value: web3.toWei("1", "ether")});
+var presaleContribution2Tx = eth.sendTransaction({from: account4, to: mtpsAddress, gas: 400000, value: web3.toWei("99", "ether")});
+while (txpool.status.pending > 0) {
+}
+printTxData("presaleContribution1Tx", presaleContribution1Tx);
+printTxData("presaleContribution2Tx", presaleContribution2Tx);
+printBalances();
+failIfGasEqualsGasUsed(presaleContribution1Tx, presaleContribution1Message + " ac3 1 ETH 1300 MTPS");
+failIfGasEqualsGasUsed(presaleContribution2Tx, presaleContribution1Message + " ac4 99 ETH 128,700 MTPS");
+printPreSaleContractDetails();
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var presaleContribution2Message = "PreSale contribution - Cap reached";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + presaleContribution2Message);
+var presaleContribution3Tx = eth.sendTransaction({from: account5, to: mtpsAddress, gas: 400000, value: web3.toWei("1", "ether")});
+while (txpool.status.pending > 0) {
+}
+printTxData("presaleContribution3Tx", presaleContribution3Tx);
+printBalances();
+passIfGasEqualsGasUsed(presaleContribution3Tx, presaleContribution1Message + " ac5 1 ETH 1,300 MTPS fail");
+printPreSaleContractDetails();
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var endPresaleMessage = "End PreSale early - Cap reached. Called by MASS ETH Fund";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + endPresaleMessage);
+var endPresaleTx = mtps.endPreSale({from: massEthFund, gas: 400000});
+while (txpool.status.pending > 0) {
+}
+printTxData("endPresaleTx", endPresaleTx);
+printBalances();
+failIfGasEqualsGasUsed(endPresaleTx, endPresaleMessage);
+printPreSaleContractDetails();
+console.log("RESULT: ");
+
+
+exit;
 
 // -----------------------------------------------------------------------------
 // Deploy AIT

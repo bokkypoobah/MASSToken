@@ -13,7 +13,7 @@ contract MASSTokenPreSale is PreSaleToken {
     uint256 public presaleStartBlock;
     uint256 public presaleEndBlock;
     uint256 public constant tokenExchangeRate = 1300;
-    uint256 public constant tokenCap = 13 * (10**6) * 10**decimals;
+    uint256 public constant tokenCap = 13 * (10**4) * 10**decimals;
     
     event CreatePreSale(address indexed _to, uint256 _amount);
     

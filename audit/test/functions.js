@@ -9,7 +9,7 @@ var accountNames = {};
 
 addAccount(eth.accounts[0], "Account #0 - Miner");
 addAccount(eth.accounts[1], "Account #1 - Contract Owner");
-addAccount(eth.accounts[2], "Account #2 - Multisig");
+addAccount(eth.accounts[2], "Account #2 - MASS Eth Fund");
 addAccount(eth.accounts[3], "Account #3");
 addAccount(eth.accounts[4], "Account #4");
 addAccount(eth.accounts[5], "Account #5");
@@ -21,7 +21,7 @@ addAccount(eth.accounts[9], "Account #9");
 
 var minerAccount = eth.accounts[0];
 var contractOwnerAccount = eth.accounts[1];
-var multisig = eth.accounts[2];
+var massEthFund = eth.accounts[2];
 var account3 = eth.accounts[3];
 var account4 = eth.accounts[4];
 var account5 = eth.accounts[5];
@@ -173,6 +173,48 @@ function failIfGasEqualsGasUsedOrContractAddressNull(contractAddress, tx, msg) {
       console.log("RESULT: PASS " + msg);
       return 1;
     }
+  }
+}
+
+//-----------------------------------------------------------------------------
+// PreSale Contract
+//-----------------------------------------------------------------------------
+var preSaleContractAddress = null;
+var preSaleContractAbi = null;
+
+function addPreSaleContractAddressAndAbi(address, abi) {
+  preSaleContractAddress = address;
+  preSaleContractAbi = abi;
+}
+
+var preSaleFromBlock = 0;
+function printPreSaleContractDetails() {
+  console.log("RESULT: preSaleContractAddress=" + preSaleContractAddress);
+  // console.log("RESULT: crowdsaleContractAbi=" + JSON.stringify(crowdsaleContractAbi));
+  if (preSaleContractAddress != null && preSaleContractAbi != null) {
+    var contract = eth.contract(preSaleContractAbi).at(preSaleContractAddress);
+    var decimals = contract.decimals();
+    console.log("RESULT: preSale.isEnded=" + contract.isEnded());
+    console.log("RESULT: preSale.contractOwner=" + contract.contractOwner());
+    console.log("RESULT: preSale.massEthFund=" + contract.massEthFund());
+    console.log("RESULT: preSale.presaleStartBlock=" + contract.presaleStartBlock());
+    console.log("RESULT: preSale.presaleEndBlock=" + contract.presaleEndBlock());
+    console.log("RESULT: preSale.tokenExchangeRate=" + contract.tokenExchangeRate());
+    console.log("RESULT: preSale.tokenCap=" + contract.tokenCap().shift(-decimals));
+    console.log("RESULT: preSale.totalSupply=" + contract.totalSupply().shift(-decimals));
+
+    var latestBlock = eth.blockNumber;
+    var i;
+
+    var createPreSaleEvents = contract.CreatePreSale({}, { fromBlock: preSaleFromBlock, toBlock: latestBlock });
+    i = 0;
+    createPreSaleEvents.watch(function (error, result) {
+      console.log("RESULT: CreatePreSale " + i++ + " #" + result.blockNumber + " _to=" + result.args._to + " _amount=" +
+        result.args._amount.shift(-18));
+    });
+    createPreSaleEvents.stopWatching();
+
+    preSaleFromBlock = parseInt(latestBlock) + 1;
   }
 }
 
