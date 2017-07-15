@@ -9,26 +9,29 @@ var accountNames = {};
 
 addAccount(eth.accounts[0], "Account #0 - Miner");
 addAccount(eth.accounts[1], "Account #1 - Contract Owner");
-addAccount(eth.accounts[2], "Account #2 - MASS Eth Fund");
-addAccount(eth.accounts[3], "Account #3");
-addAccount(eth.accounts[4], "Account #4");
-addAccount(eth.accounts[5], "Account #5");
-addAccount(eth.accounts[6], "Account #6");
-addAccount(eth.accounts[7], "Account #7");
-addAccount(eth.accounts[8], "Account #8");
-addAccount(eth.accounts[9], "Account #9");
-
+addAccount(eth.accounts[2], "Account #2 - ETH Fund");
+addAccount(eth.accounts[3], "Account #3 - MASS Fund");
+addAccount(eth.accounts[4], "Account #4 - ETH Fee");
+addAccount(eth.accounts[5], "Account #5 - MASS Promisory");
+addAccount(eth.accounts[6], "Account #6 - ETH Promisory");
+addAccount(eth.accounts[7], "Account #7 - MASS Bounty");
+addAccount(eth.accounts[8], "Account #8 - ETH Bounty");
+addAccount(eth.accounts[9], "Account #9 - Contrib #1");
+addAccount(eth.accounts[10], "Account #A - Contrib #2");
+addAccount(eth.accounts[11], "Account #B - Contrib #2");
 
 var minerAccount = eth.accounts[0];
 var contractOwnerAccount = eth.accounts[1];
-var massEthFund = eth.accounts[2];
-var account3 = eth.accounts[3];
-var account4 = eth.accounts[4];
-var account5 = eth.accounts[5];
-var account6 = eth.accounts[6];
-var account7 = eth.accounts[7];
-var account8 = eth.accounts[8];
-var account9 = eth.accounts[9];
+var ethFundAccount = eth.accounts[2];
+var massFundAccount = eth.accounts[3];
+var ethFeeAccount = eth.accounts[4];
+var massPromisoryAccount = eth.accounts[5];
+var ethPromisoryAccount = eth.accounts[6];
+var massBountyAccount = eth.accounts[7];
+var ethBountyAccount = eth.accounts[8];
+var contrib1Account = eth.accounts[9];
+var contrib2Account = eth.accounts[10];
+var contrib3Account = eth.accounts[11];
 
 var baseBlock = eth.blockNumber;
 

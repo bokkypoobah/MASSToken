@@ -125,7 +125,13 @@ the deployment parameters are correctly set, including the constant parameters.
 
 ## Testing
 
-See [test/README.md](test/README.md), [test/01_test1.sh](test/01_test1.sh) and [test/test1results.txt](test/test1results.txt).
+* PreSale Contract
+
+  * The PreSale contract testing script [test/01_test1.sh](test/01_test1.sh) and results [test/test1results.txt](test/test1results.txt).
+
+* Crowdsale Contract
+
+  * The Crowdsale contract testing script [test/02_test2.sh](test/02_test2.sh) and results [test/test2results.txt](test/test2results.txt).
 
 <br />
 
