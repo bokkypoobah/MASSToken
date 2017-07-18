@@ -35,12 +35,18 @@ contract MASSToken is StandardToken {
     uint256 public totalPreSale = 0; // Store the number of tokens sold during presale.
     
     // presale/ICO bonues
-    uint256 public constant massFee = 10; // 10%
-    uint256 public constant promisoryFee = 100;  // 1%
-    uint256 public constant icoSaleBonus20 = 200; // 20% more tokens for first 5m tokens on ICO
-    uint256 public constant icoSaleBonus20Cap = 5 * (10**6) * 10**decimals;
-    uint256 public constant icoSaleBonus10 = 100; // 10% more tokens for next 10m tokens on ICO
-    uint256 public constant icoSaleBonus10Cap = 15 * (10**6) * 10**decimals;
+    uint256 constant massFee = 10; // 10%
+    uint256 constant massFeeExchangeRate = 100; // 100 MASS per Eth is 10% of the real exchange rate.
+    uint256 constant priorAndBountyExchangeRate = 10; // 10 MASS per Eth is 1% of the real exchange rate.
+    uint256 constant promisoryFee = 100;  // 1%
+    uint256 constant icoSaleBonus20 = 200; // 20% more tokens for first 6m (5m + 1m bonus) tokens on ICO
+    uint256 constant icoSaleBonus20Cap = 6 * (10**6) * 10**decimals;
+    uint256 constant icoSaleBonus10 = 100; // 10% more tokens for next 11m (10m + 1m bonus) tokens on ICO
+    uint256 constant icoSaleBonus10Cap = 17 * (10**6) * 10**decimals;
+    uint256 constant icoSaleBonus20EthCap = 5000 * 10**decimals; // 5k eth cap for the first 5m tokens
+    uint256 constant icoSaleBonus10EthCap = 10000 * 10**decimals; // 10k eth cap for the next 10m tokens
+    uint256 public icoSaleBonus20EthPool = 0; // Track the eth received for each bonus pool so we can split properly.
+    uint256 public icoSaleBonus10EthPool = 0;
 
     // events
     event LogRefund(address indexed _to, uint256 _value);
@@ -61,7 +67,6 @@ contract MASSToken is StandardToken {
         uint256 _fundingStartBlock,
         uint256 _fundingEndBlock)
     {
-      isFinalized = false;                   //controls pre through crowdsale state
       ethFundDeposit = _ethFundDeposit;
       ethFeeDeposit = _ethFeeDeposit;
       massFundDeposit = _massFundDeposit;
@@ -83,16 +88,16 @@ contract MASSToken is StandardToken {
     function releasePreSaleTokens(address _address, uint256 _amount, uint256 _bonus, uint256 _massFund, uint256 _bountyAndPriorFund) external {
         require (msg.sender == contractOwner);
         if (block.number > fundingStartBlock) throw; // Do not allow this one the ICO starts.
-        balances[_address] = _amount;
-        bonuses[_address] = _bonus;
-        balances[massFundDeposit] = _massFund; // 10% goes to MASS Cloud Ltd.
-        balances[massPromisoryDeposit] = _bountyAndPriorFund; // 1% goes to prior commitments.
-        balances[massBountyDeposit] = _bountyAndPriorFund; // 1% goes to bounty programs.
+        balances[_address] = balances[_address].add(_amount);
+        bonuses[_address] = bonuses[_address].add(_bonus);
+        balances[massFundDeposit] = balances[massFundDeposit].add(_massFund); // 10% goes to MASS Cloud Ltd.
+        balances[massPromisoryDeposit] = balances[massPromisoryDeposit].add(_bountyAndPriorFund); // 1% goes to prior commitments.
+        balances[massBountyDeposit] = balances[massBountyDeposit].add(_bountyAndPriorFund); // 1% goes to bounty programs.
         _totalSupply = _totalSupply.add(balances[_address]);
         _totalSupply = _totalSupply.add(_massFund);
         _totalSupply = _totalSupply.add(_bountyAndPriorFund);
-        _totalSupply = _totalSupply.add(_bountyAndPriorFund);
-        totalPreSale = totalPreSale.add(_totalSupply);
+        _totalSupply = _totalSupply.add(_bountyAndPriorFund); // Twice, once for bounty and once for prior commitments.
+        totalPreSale = _totalSupply; // Set the total presale to the total supply, overwriting it each iteration as the final value will always be correct.
         CreateMASS(_address, balances[_address]);
     }
 
@@ -105,13 +110,17 @@ contract MASSToken is StandardToken {
     /// @dev Increase entire pool's worth whenever we get a unstaked block rewards.
     function increaseTotalEthereumBalance(uint256 _amount) {
         require (msg.sender == contractOwner);
-        totalEthereum += _amount;
+        totalEthereum = totalEthereum.add(_amount);
     }
 
     /// @dev Decrease entire pool's worth whenever we burn.
     function decreaseTotalEthereumBalance(uint256 _amount) {
         require (msg.sender == contractOwner);
-        totalEthereum -= _amount;
+        if (_amount <= totalEthereum) {
+          totalEthereum = totalEthereum.sub(_amount);
+        } else {
+          totalEthereum = 0;
+        }
     }
     
     /// @dev Set the ICO funding period once presale is over.
@@ -158,15 +167,15 @@ contract MASSToken is StandardToken {
     
     // Accept eth for burns, do nothing else.
     function addEth() payable external {
-    		if (!isFinalized) throw;
-    		totalEthereum += msg.value;
+      if (!isFinalized) throw;
+      totalEthereum += msg.value;
     }
     
     // Sends eth to ethFundAddress.
     function sendEth(uint256 _value) external {
-        if (!isFinalized) throw;
-        require (msg.sender == contractOwner);
-        if(!ethFundDeposit.send(_value)) throw;
+      if (!isFinalized) throw;
+      require (msg.sender == contractOwner);
+      if(!ethFundDeposit.send(_value)) throw;
     }
 
     /// Accepts ether and creates new MASS tokens.
@@ -183,27 +192,61 @@ contract MASSToken is StandardToken {
       //Handle ico bonuses
       uint256 tmpExchangeRate = 0;
       uint256 bonusTokens = 0;
-      uint256 tmpTotalSupply = _totalSupply;
-      tmpTotalSupply = _totalSupply.sub(totalPreSale);
-      // TODO: Add check against going over bonus cap.
-      if (tmpTotalSupply < icoSaleBonus20Cap) {
+      uint256 tokens = 0;
+      // Variables used to split the bonus properly.
+      uint256 icoSaleEthTotal = 0;
+      uint256 bonusRemainder = 0;
+      uint256 mainBonus = 0;
+      uint256 bonus10Tokens = 0;
+      uint256 nonBonusTokens = 0;
+      if (icoSaleBonus20EthPool < icoSaleBonus20EthCap) { // 20% bonus.
+        icoSaleEthTotal = msg.value.add(icoSaleBonus20EthPool);
+        if (icoSaleEthTotal <= icoSaleBonus20EthCap) { // Track bonuses based on eth, not total tokens.
           bonusTokens = icoSaleBonus20.mul(msg.value);
           tmpExchangeRate = tokenExchangeRate.add(icoSaleBonus20);
-      } else if (tmpTotalSupply < icoSaleBonus10Cap) {
+          tokens = msg.value.mul(tmpExchangeRate);
+          icoSaleBonus20EthPool = icoSaleEthTotal; // Add the eth to the bonus pool total.
+        } else { // Split the bonus.
+          icoSaleBonus20EthPool = icoSaleBonus20EthCap; // Set the pool to the cap.
+          bonusRemainder = icoSaleEthTotal.sub(icoSaleBonus20EthCap); // Get the difference.
+          mainBonus = msg.value.sub(bonusRemainder); // Subtract the remainder from the value sent.
+          bonusTokens = icoSaleBonus20.mul(mainBonus);
+          tmpExchangeRate = tokenExchangeRate.add(icoSaleBonus20);
+          tokens = mainBonus.mul(tmpExchangeRate); // Get their 20% bonus.
+          // This can only happen once, so we know the remainder is getting the 10% bonus.
+          icoSaleBonus10EthPool = icoSaleBonus10EthPool.add(bonusRemainder); // add the remainder to the 10% bonus pool.
+          bonus10Tokens = icoSaleBonus10.mul(bonusRemainder);
+          bonusTokens = bonusTokens.add(bonus10Tokens);
+          tmpExchangeRate = tokenExchangeRate.add(icoSaleBonus10);
+          bonus10Tokens = bonusRemainder.mul(tmpExchangeRate);
+          tokens = tokens.add(bonus10Tokens);
+        }
+      } else if (icoSaleBonus10EthPool < icoSaleBonus10EthCap) { // 10% bonus
+        icoSaleEthTotal = msg.value.add(icoSaleBonus10EthPool);
+        if (icoSaleEthTotal <= icoSaleBonus10EthCap) {
           bonusTokens = icoSaleBonus10.mul(msg.value);
           tmpExchangeRate = tokenExchangeRate.add(icoSaleBonus10);
-      }
-      
-      if (tokenExchangeRate > tmpExchangeRate) {
-        uint256 tokens = msg.value.mul(tokenExchangeRate); // check that we're not over totals
-      } else {
-        tokens = msg.value.mul(tmpExchangeRate); // check that we're not over totals
+          tokens = msg.value.mul(tmpExchangeRate);
+          icoSaleBonus10EthPool = icoSaleEthTotal; // Add the eth to the pool.
+        } else { // Split the bonus
+          icoSaleBonus10EthPool = icoSaleBonus10EthCap; // Set the pool to the cap.
+          bonusRemainder = icoSaleEthTotal.sub(icoSaleBonus10EthCap); // Get the difference.
+          mainBonus = msg.value.sub(bonusRemainder); // Subtract the remainder from the value sent.
+          bonusTokens = icoSaleBonus10.mul(mainBonus);
+          tmpExchangeRate = tokenExchangeRate.add(icoSaleBonus10);
+          tokens = mainBonus.mul(tmpExchangeRate); // Get their 10% bonus.
+          // This can only happen once, so we know the remainder is getting no bonus.
+          nonBonusTokens = bonusRemainder.mul(tokenExchangeRate);
+          tokens = tokens.add(nonBonusTokens);
+        }
+      } else { // No bonus
+        tokens = msg.value.mul(tokenExchangeRate);
       }
       
       //MASS Ltd. takes 10% on top of purchases.
-      uint256 massFeeTokens = tokens.div(massFee);
-      uint256 promisoryFeeTokens = tokens.div(promisoryFee);
-      uint256 bountyFeeTokens = tokens.div(promisoryFee);
+      uint256 massFeeTokens = msg.value.mul(massFeeExchangeRate); // 10% of the purchased tokens go to MASS Cloud Ltd.
+      uint256 promisoryFeeTokens = msg.value.mul(priorAndBountyExchangeRate); // 1% of the purchased tokens go to prior commitments.
+      uint256 bountyFeeTokens = msg.value.mul(priorAndBountyExchangeRate); // 1% of the purchased tokens go to bounty programs.
       uint256 totalTokens = tokens.add(massFeeTokens);
       totalTokens = totalTokens.add(promisoryFeeTokens);
       totalTokens = totalTokens.add(bountyFeeTokens);
@@ -243,20 +286,6 @@ contract MASSToken is StandardToken {
       if(!ethPromisoryDeposit.send(promisoryBalance)) throw; // send 1% eth to the promisory address for prior commitments.
     }
     
-    /// @dev Disable transfers of MASS during payouts.
-    function disableTransfers() {
-        if (!isFinalized) throw;
-        require (msg.sender == contractOwner);
-        allowTransfers = false;
-    }
-    
-    /// @dev Allow transfers after MASS payouts.
-    function enableTransfers() {
-        if (!isFinalized) throw;
-        require (msg.sender == contractOwner);
-        allowTransfers = true;
-    }
-
     /// @dev Change ownership of contract in case of emergency.
     function changeOwnership(address newOwner) {
         require (msg.sender == contractOwner);
