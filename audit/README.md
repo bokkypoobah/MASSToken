@@ -200,7 +200,7 @@ the deployment parameters are correctly set, including the constant parameters.
 * [ ] The [`transfer(...)`](https://github.com/ConsenSys/smart-contract-best-practices#be-aware-of-the-tradeoffs-between-send-transfer-and-callvalue) call is the last statements in the control flow of `proxyPayment(...)` to prevent the hijacking of the control flow
 * NOTE that this contract does not implement the check for the number of bytes sent to functions to reject errors from the [short address attack](http://vessenes.com/the-erc20-short-address-attack-explained/)
 * NOTE that this contract does not implement the modified `approve(...)` and `approveAnCall(...)` functions to mitigate the risk of [double spending](https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/edit#) in the `approve(...)` and `transferFrom(...)` calls
-* [ ] The testing has been done using Geth/v1.6.7-stable-ab5646c5/darwin-amd64/go1.8.3 and solc 0.4.11+commit.68ef5810.Darwin.appleclang instead of one of the testing frameworks and JavaScript VMs to simulate the live environment as closely as possible
+* [ ] The testing has been done using Geth/v1.6.7-stable-ab5646c5/darwin-amd64/go1.8.3 and solc 0.4.13+commit.0fb4cb1a.Darwin.appleclang instead of one of the testing frameworks and JavaScript VMs to simulate the live environment as closely as possible
 * [ ] The test scripts can be found in [test/02_test2.sh](test/02_test2.sh)
 * [ ] The test results can be found in [test/test2results.txt](test/test2results.txt) for the results and [test/test2output.txt](test/test2output.txt) for the full output
 
