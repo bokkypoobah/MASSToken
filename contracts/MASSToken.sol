@@ -6,12 +6,12 @@ import "./SafeMath.sol";
 //Gives devs a cut of eth and tokens.
 //Initial ICO design based off BAT (known working and secure).
 contract MASSToken is StandardToken {
-		using SafeMath for uint256;
+    using SafeMath for uint256;
 		
     // metadata
     string public constant name = "MASS";
     string public constant symbol = "MASS";
-    uint256 public constant decimals = 18;
+    uint8 public constant decimals = 18;
     string public version = "1.0";
 
     // contracts
@@ -288,18 +288,53 @@ contract MASSToken is StandardToken {
     
     /// @dev Change ownership of contract in case of emergency.
     function changeOwnership(address newOwner) {
-        require (msg.sender == contractOwner);
-        contractOwner = newOwner;
+      require (msg.sender == contractOwner);
+      contractOwner = newOwner;
+    }
+
+    function changeEthFundAddress(address _addr) {
+      require (msg.sender == contractOwner);
+      ethFundDeposit = _addr;
+    }
+
+    function changeEthFeeAddress(address _addr) {
+      require (msg.sender == contractOwner);
+      ethFeeDeposit = _addr;
+    }
+
+    function changeMassFundAddress(address _addr) {
+      require (msg.sender == contractOwner);
+      massFundDeposit = _addr;
+    }
+
+    function changeMassPromisoryAddress(address _addr) {
+      require (msg.sender == contractOwner);
+      massPromisoryDeposit = _addr;
+    }
+
+    function changeEthPromisoryAddress(address _addr) {
+      require (msg.sender == contractOwner);
+      ethPromisoryDeposit = _addr;
+    }
+
+    function changeMassBountyAddress(address _addr) {
+      require (msg.sender == contractOwner);
+      massBountyDeposit = _addr;
+    }
+
+    function changeEthBountyAddress(address _addr) {
+      require (msg.sender == contractOwner);
+      ethBountyDeposit = _addr;
     }
 
     /// @dev Internal function to prevent contracts from purchasing tokens.
      // Borrowed from StatusContributions.sol (SNT)
     function isContract(address _address) constant internal returns (bool) {
-        if (_address == 0) return false;
-        uint256 size;
-        assembly {
-            size := extcodesize(_address)
-        }
-        return (size > 0);
+      if (_address == 0) return false;
+      uint256 size;
+      assembly {
+          size := extcodesize(_address)
+      }
+      return (size > 0);
     }
 }
